@@ -2,7 +2,11 @@ package io.quarkiverse.restlint.deployment;
 
 import java.util.List;
 
-import io.quarkus.builder.BuildException;
+import org.jboss.jandex.AnnotationInstance;
+import org.jboss.jandex.DotName;
+import org.jboss.jandex.Index;
+import org.jboss.jandex.MethodInfo;
+import org.jboss.jandex.MethodParameterInfo;
 
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
@@ -10,11 +14,6 @@ import io.quarkus.deployment.builditem.ApplicationIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.devui.spi.page.CardPageBuildItem;
 import io.quarkus.devui.spi.page.Page;
-import org.jboss.jandex.AnnotationInstance;
-import org.jboss.jandex.DotName;
-import org.jboss.jandex.Index;
-import org.jboss.jandex.MethodInfo;
-import org.jboss.jandex.MethodParameterInfo;
 
 class RestlintProcessor {
 
@@ -39,7 +38,7 @@ class RestlintProcessor {
     }
 
     @BuildStep
-    void verifyBodyOnGet(ApplicationIndexBuildItem index, BuildProducer<ErrorBuildItem> restErrors) throws BuildException {
+    void verifyBodyOnGet(ApplicationIndexBuildItem index, BuildProducer<ErrorBuildItem> restErrors) {
 
         Index jandex = index.getIndex();
         List<AnnotationInstance> annotations = jandex.getAnnotations(DotName.createSimple("jakarta.ws.rs.GET"));
