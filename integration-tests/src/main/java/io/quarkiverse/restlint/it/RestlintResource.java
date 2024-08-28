@@ -19,8 +19,6 @@ package io.quarkiverse.restlint.it;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.UriInfo;
 
 @Path("/restlint")
 @ApplicationScoped
@@ -28,8 +26,8 @@ public class RestlintResource {
     // add some rest methods here
 
     @GET
-    public String hello(@Context UriInfo uriInfo) {
-        System.out.println("Hello " + uriInfo.getQueryParameters().get("name").get(0));
-        return "Hello restlint";
+    public String findByName(String body) { // @QueryParam("name") String name
+        System.out.println("Name from query param: " + body);
+        return "Hello %s".formatted(body);
     }
 }

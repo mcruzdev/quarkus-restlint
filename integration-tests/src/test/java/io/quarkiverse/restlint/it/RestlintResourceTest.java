@@ -1,7 +1,7 @@
 package io.quarkiverse.restlint.it;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.containsString;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +16,6 @@ public class RestlintResourceTest {
                 .when().get("/restlint")
                 .then()
                 .statusCode(200)
-                .body(is("Hello restlint"));
+                .body(containsString("Hello"));
     }
 }
